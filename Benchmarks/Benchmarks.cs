@@ -9,7 +9,7 @@ namespace Benchmarks
     [MinColumn, MaxColumn]
     public class Benchmarks
     {
-        [Params(10000, 100000, 1000000)]
+        [Params(1000000)]
         public int ItemsSize { get; set; }
 
         [Params(100, 1000)]
