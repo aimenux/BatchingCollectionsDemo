@@ -1,15 +1,15 @@
 ﻿﻿![.NET Core](https://github.com/aimenux/BatchLinqDemo/workflows/.NET%20Core/badge.svg)
 # BatchLinqDemo
 ```
-Batches an enumerable into sized buckets
+Batches an enumerable into sized chunks
 ```
-> I m using 3 implementations in order to batch an enumerable into slices. `Implementation 5` is the best one according to benchmark tests.
+> I m using multiple implementations in order to batch an enumerable into chunks. `Last implementation` is the best one (perf/memory) according to benchmark tests.
 >
->> **(1)** BatchExtractor 1 & 2 : based on group-by operator
+>> **(1)** `BatchExtractor 1 & 2` : based on group-by operator
 >>
->> **(2)** BatchExtractor 3 & 4 : based on take/skip operators
+>> **(2)** `BatchExtractor 3` : based on take/skip operators
 >>
->> **(3)** BatchExtractor 3 & 4 : based on yield operator
+>> **(3)** `BatchExtractor 4 & 5` : based on yield operator
 
 **`Tools`** : vs19, net core 3.1
 
