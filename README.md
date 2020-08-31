@@ -5,25 +5,26 @@ Batches an enumerable into sized chunks
 ```
 > I m using multiple implementations in order to batch an enumerable into chunks. `Last implementation` is the best one (perf/memory) according to benchmark tests.
 >
->> **(1)** `BatchExtractor 1 & 2` : based on group-by operator
+>> **(1)** `BatchExtractor 1` : based on group-by operator
 >>
->> **(2)** `BatchExtractor 3` : based on take/skip operators
+>> **(2)** `BatchExtractor 2 & 3` : based on take/skip operators
 >>
->> **(3)** `BatchExtractor 4 & 5` : based on yield operator
+>> **(3)** `BatchExtractor 4` : based on enumerators
+>>
+>> **(4)** `BatchExtractor 5 & 6` : based on yield operator
 
 **`Tools`** : vs19, net core 3.1
 
-
 ```
-|                   Method | ItemsSize | BatchSize |       Mean |    Error |    StdDev |     Median |      Min |        Max |      Gen 0 |      Gen 1 |     Gen 2 | Allocated |
-|------------------------- |---------- |---------- |-----------:|---------:|----------:|-----------:|---------:|-----------:|-----------:|-----------:|----------:|----------:|
-| BatchExtractor1Benchmark |   1000000 |       100 | 1,477.3 ms | 81.25 ms | 238.29 ms | 1,561.2 ms | 627.6 ms | 1,745.1 ms | 41000.0000 | 12000.0000 | 3000.0000 | 236.23 MB |
-| BatchExtractor2Benchmark |   1000000 |       100 | 1,404.7 ms | 77.40 ms | 227.01 ms | 1,480.5 ms | 635.5 ms | 1,596.7 ms | 35000.0000 | 12000.0000 | 3000.0000 | 208.15 MB |
-| BatchExtractor3Benchmark |   1000000 |       100 |   755.3 ms | 16.19 ms |  46.96 ms |   767.9 ms | 486.7 ms |   803.7 ms | 45000.0000 |  1000.0000 |         - | 204.01 MB |
-| BatchExtractor4Benchmark |   1000000 |       100 |   769.2 ms | 15.35 ms |  28.83 ms |   775.0 ms | 642.7 ms |   793.8 ms | 45000.0000 |  1000.0000 |         - | 204.01 MB |
-| BatchExtractor5Benchmark |   1000000 |       100 |   545.7 ms | 70.82 ms | 208.81 ms |   632.4 ms | 261.6 ms |   791.6 ms | 42000.0000 |  1000.0000 |         - | 190.96 MB |
-| BatchExtractor1Benchmark |   1000000 |      1000 | 1,337.8 ms | 68.03 ms | 200.60 ms | 1,394.3 ms | 778.4 ms | 1,679.0 ms | 40000.0000 | 12000.0000 | 3000.0000 | 229.62 MB |
-| BatchExtractor2Benchmark |   1000000 |      1000 | 1,313.8 ms | 73.46 ms | 216.58 ms | 1,363.6 ms | 649.6 ms | 1,649.1 ms | 35000.0000 | 11000.0000 | 3000.0000 | 199.04 MB |
-| BatchExtractor3Benchmark |   1000000 |      1000 |   667.9 ms | 32.17 ms |  94.87 ms |   679.2 ms | 333.0 ms |   849.9 ms | 44000.0000 |  1000.0000 |         - | 198.94 MB |
-| BatchExtractor4Benchmark |   1000000 |      1000 |   640.9 ms | 41.33 ms | 121.87 ms |   669.6 ms | 329.6 ms |   797.5 ms | 44000.0000 |  1000.0000 |         - | 198.94 MB |
-| BatchExtractor5Benchmark |   1000000 |      1000 |   605.6 ms | 39.97 ms | 117.86 ms |   628.1 ms | 358.0 ms |   849.0 ms | 42000.0000 |  1000.0000 |         - | 190.76 MB |
+|                   Method | ItemsSize | BatchSize |      Mean |     Error |    StdDev |    Median |      Min |       Max |    Gen 0 |    Gen 1 | Gen 2 | Allocated |
+|------------------------- |---------- |---------- |----------:|----------:|----------:|----------:|---------:|----------:|---------:|---------:|------:|----------:|
+| BatchExtractor1Benchmark |     10000 |       100 |  8.282 ms | 0.9221 ms | 2.7187 ms |  9.882 ms | 3.385 ms | 11.230 ms | 398.4375 | 199.2188 |     - |   2.36 MB |
+| BatchExtractor3Benchmark |     10000 |       100 |  7.644 ms | 0.0817 ms | 0.0802 ms |  7.648 ms | 7.528 ms |  7.821 ms | 406.2500 |        - |     - |   1.84 MB |
+| BatchExtractor4Benchmark |     10000 |       100 |  7.476 ms | 0.1481 ms | 0.4028 ms |  7.601 ms | 5.752 ms |  7.980 ms | 421.8750 |  23.4375 |     - |   1.91 MB |
+| BatchExtractor5Benchmark |     10000 |       100 |  8.273 ms | 0.1649 ms | 0.4344 ms |  8.434 ms | 6.240 ms |  9.174 ms | 453.1250 |  15.6250 |     - |   2.04 MB |
+| BatchExtractor6Benchmark |     10000 |       100 |  7.940 ms | 0.0863 ms | 0.0721 ms |  7.931 ms | 7.788 ms |  8.071 ms | 421.8750 |  15.6250 |     - |   1.91 MB |
+| BatchExtractor1Benchmark |     10000 |      1000 | 10.047 ms | 0.1950 ms | 0.3205 ms | 10.111 ms | 8.843 ms | 10.429 ms | 390.6250 | 187.5000 |     - |    2.3 MB |
+| BatchExtractor3Benchmark |     10000 |      1000 |  7.920 ms | 0.1228 ms | 0.1149 ms |  7.904 ms | 7.806 ms |  8.167 ms | 406.2500 |        - |     - |   1.83 MB |
+| BatchExtractor4Benchmark |     10000 |      1000 |  8.184 ms | 0.1636 ms | 0.2069 ms |  8.240 ms | 7.580 ms |  8.421 ms | 421.8750 | 125.0000 |     - |   1.91 MB |
+| BatchExtractor5Benchmark |     10000 |      1000 |  3.172 ms | 0.0638 ms | 0.1693 ms |  3.129 ms | 2.940 ms |  3.656 ms | 437.5000 | 140.6250 |     - |   1.99 MB |
+| BatchExtractor6Benchmark |     10000 |      1000 |  7.317 ms | 0.5710 ms | 1.6747 ms |  8.002 ms | 3.028 ms |  9.215 ms | 421.8750 |  89.8438 |     - |   1.91 MB |

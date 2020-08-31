@@ -9,11 +9,11 @@ namespace Lib
 
         public IEnumerable<IEnumerable<TSource>> Batch<TSource>(IEnumerable<TSource> items, int batchSize)
         {
-            var index = 0;
-            var chunks = from item in items
-                group item by index++ % batchSize into chunk
-                select chunk.AsEnumerable();
-            return chunks;
+            for (var index = 0; index < items.Count(); index+= batchSize)
+            {
+                var batch = items.Skip(index).Take(batchSize);
+                yield return batch;
+            }
         }
     }
 }

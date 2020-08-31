@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Lib
 {
@@ -9,36 +9,27 @@ namespace Lib
 
         public IEnumerable<IEnumerable<TSource>> Batch<TSource>(IEnumerable<TSource> items, int batchSize)
         {
-            var count = 0;
-            TSource[] bucket = null;
+            var batch = new List<TSource>();
 
             foreach (var item in items)
             {
-                if (bucket == null)
-                {
-                    bucket = new TSource[batchSize];
-                }
-
-                bucket[count++] = item;
-
-                if (count != batchSize)
+                batch.Add(item);
+                if (batch.Count != batchSize)
                 {
                     continue;
                 }
 
-                yield return bucket;
-
-                bucket = null;
-                count = 0;
+                yield return batch;
+                batch = new List<TSource>();
             }
 
-            if (bucket == null || count <= 0)
+            if (!batch.Any())
             {
                 yield break;
             }
 
-            Array.Resize(ref bucket, count);
-            yield return bucket;
+            batch.TrimExcess();
+            yield return batch;
         }
     }
 }

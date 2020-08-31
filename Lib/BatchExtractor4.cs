@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Lib
 {
@@ -9,25 +8,37 @@ namespace Lib
 
         public IEnumerable<IEnumerable<TSource>> Batch<TSource>(IEnumerable<TSource> items, int batchSize)
         {
-            var batch = new List<TSource>();
-
-            foreach (var item in items)
+            using(var enumerator = items.GetEnumerator())
             {
-                batch.Add(item);
-                if (batch.Count != batchSize)
+                while (enumerator.MoveNext())
                 {
-                    continue;
+                    yield return Batch(enumerator, batchSize);
+                }
+            }
+        }
+
+        private static IEnumerable<TSource> Batch<TSource>(IEnumerator<TSource> enumerator, int batchSize)
+        {
+            var index = 0;
+            var batch = new List<TSource>(batchSize);
+            
+            while(true)
+            {
+                batch.Add(enumerator.Current);
+
+                index++;
+                if (index == batchSize)
+                {
+                    break;
                 }
 
-                yield return batch;
-                batch = new List<TSource>();
+                if (!enumerator.MoveNext())
+                {
+                    break;
+                }
             }
 
-            if (batch.Any())
-            {
-                batch.TrimExcess();
-                yield return batch;
-            }
+            return batch;
         }
     }
 }
