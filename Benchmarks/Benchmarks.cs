@@ -12,7 +12,7 @@ namespace Benchmarks
     [Config(typeof(FilterConfig))]
     public class Benchmarks
     {
-        [Params(10000)]
+        [Params(1000000)]
         public int ItemsSize { get; set; }
 
         [Params(100, 1000)]
