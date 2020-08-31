@@ -24,6 +24,8 @@ namespace App
             services.AddSingleton<IBatchExtractor, BatchExtractor1>();
             services.AddSingleton<IBatchExtractor, BatchExtractor2>();
             services.AddSingleton<IBatchExtractor, BatchExtractor3>();
+            services.AddSingleton<IBatchExtractor, BatchExtractor4>();
+            services.AddSingleton<IBatchExtractor, BatchExtractor5>();
             services.Configure<Settings>(configuration.GetSection(nameof(Settings)));
 
             services.AddLogging(loggingBuilder =>
