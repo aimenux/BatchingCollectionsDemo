@@ -26,6 +26,7 @@ namespace Benchmarks
         public BatchExtractor4 BatchExtractor4 { get; private set; }
         public BatchExtractor5 BatchExtractor5 { get; private set; }
         public BatchExtractor6 BatchExtractor6 { get; private set; }
+        public BatchExtractor7 BatchExtractor7 { get; private set; }
 
         [GlobalSetup]
         public void Setup()
@@ -36,6 +37,7 @@ namespace Benchmarks
             BatchExtractor4 = new BatchExtractor4();
             BatchExtractor5 = new BatchExtractor5();
             BatchExtractor6 = new BatchExtractor6();
+            BatchExtractor7 = new BatchExtractor7();
             Items = RandomGenerator.RandomStrings(ItemsSize);
         }
 
@@ -79,6 +81,13 @@ namespace Benchmarks
         public int BatchExtractor6Benchmark()
         {
             var batchs = BatchExtractor6.Batch(Items, BatchSize);
+            return batchs.Count();
+        }
+
+        [Benchmark]
+        public int BatchExtractor7Benchmark()
+        {
+            var batchs = BatchExtractor7.Batch(Items, BatchSize);
             return batchs.Count();
         }
 

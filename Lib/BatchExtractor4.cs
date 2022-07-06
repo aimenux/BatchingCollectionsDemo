@@ -2,13 +2,11 @@
 
 namespace Lib
 {
-    public class BatchExtractor4 : IBatchExtractor
+    public class BatchExtractor4 : AbstractBatchExtractor
     {
-        public string Name => GetType().Name;
-
-        public IEnumerable<IEnumerable<TSource>> Batch<TSource>(IEnumerable<TSource> items, int batchSize)
+        public override IEnumerable<IEnumerable<TSource>> Batch<TSource>(IEnumerable<TSource> items, int batchSize)
         {
-            using(var enumerator = items.GetEnumerator())
+            using (var enumerator = items.GetEnumerator())
             {
                 while (enumerator.MoveNext())
                 {
@@ -21,8 +19,8 @@ namespace Lib
         {
             var index = 0;
             var batch = new List<TSource>(batchSize);
-            
-            while(true)
+
+            while (true)
             {
                 batch.Add(enumerator.Current);
 

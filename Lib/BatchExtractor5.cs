@@ -3,11 +3,9 @@ using System.Linq;
 
 namespace Lib
 {
-    public class BatchExtractor5 : IBatchExtractor
+    public class BatchExtractor5 : AbstractBatchExtractor
     {
-        public string Name => GetType().Name;
-
-        public IEnumerable<IEnumerable<TSource>> Batch<TSource>(IEnumerable<TSource> items, int batchSize)
+        public override IEnumerable<IEnumerable<TSource>> Batch<TSource>(IEnumerable<TSource> items, int batchSize)
         {
             var batch = new List<TSource>();
 

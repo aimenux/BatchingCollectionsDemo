@@ -6,6 +6,7 @@ using Lib;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Options;
 
 namespace App
@@ -26,14 +27,18 @@ namespace App
             services.AddSingleton<IBatchExtractor, BatchExtractor3>();
             services.AddSingleton<IBatchExtractor, BatchExtractor5>();
             services.AddSingleton<IBatchExtractor, BatchExtractor6>();
+            services.AddSingleton<IBatchExtractor, BatchExtractor7>();
             services.Configure<Settings>(configuration.GetSection(nameof(Settings)));
 
             services.AddLogging(loggingBuilder =>
             {
-                loggingBuilder.AddConsole(options =>
+                loggingBuilder.AddSimpleConsole(options =>
                 {
-                    options.DisableColors = false;
+                    options.SingleLine = true;
+                    options.IncludeScopes = true;
+                    options.UseUtcTimestamp = true;
                     options.TimestampFormat = "[HH:mm:ss:fff] ";
+                    options.ColorBehavior = LoggerColorBehavior.Enabled;
                 });
                 loggingBuilder.AddNonGenericLogger();
                 loggingBuilder.SetMinimumLevel(LogLevel.Trace);
@@ -46,7 +51,7 @@ namespace App
 
             var batchSize = settings.BatchSize;
             var itemsSize = settings.ItemsSize;
-            
+
             foreach (var extractor in extractors)
             {
                 var items = RandomGenerator.RandomStrings(itemsSize);

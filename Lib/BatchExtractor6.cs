@@ -3,11 +3,9 @@ using System.Collections.Generic;
 
 namespace Lib
 {
-    public class BatchExtractor6 : IBatchExtractor
+    public class BatchExtractor6 : AbstractBatchExtractor
     {
-        public string Name => GetType().Name;
-
-        public IEnumerable<IEnumerable<TSource>> Batch<TSource>(IEnumerable<TSource> items, int batchSize)
+        public override IEnumerable<IEnumerable<TSource>> Batch<TSource>(IEnumerable<TSource> items, int batchSize)
         {
             var count = 0;
             TSource[] batch = null;

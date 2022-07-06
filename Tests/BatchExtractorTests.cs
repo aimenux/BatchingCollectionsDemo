@@ -30,29 +30,33 @@ namespace Tests
 
         private static IEnumerable<object[]> GetTestParameters()
         {
-            yield return new object[] {new BatchExtractor1(), 10, 10, 1};
-            yield return new object[] {new BatchExtractor1(), 100, 10, 10};
-            yield return new object[] {new BatchExtractor1(), 1000, 10, 100};
+            yield return new object[] { new BatchExtractor1(), 10, 10, 1 };
+            yield return new object[] { new BatchExtractor1(), 100, 10, 10 };
+            yield return new object[] { new BatchExtractor1(), 1000, 10, 100 };
 
-            yield return new object[] {new BatchExtractor2(), 10, 10, 1};
-            yield return new object[] {new BatchExtractor2(), 100, 10, 10};
-            yield return new object[] {new BatchExtractor2(), 1000, 10, 100};
+            yield return new object[] { new BatchExtractor2(), 10, 10, 1 };
+            yield return new object[] { new BatchExtractor2(), 100, 10, 10 };
+            yield return new object[] { new BatchExtractor2(), 1000, 10, 100 };
 
-            yield return new object[] {new BatchExtractor3(), 10, 10, 1};
-            yield return new object[] {new BatchExtractor3(), 100, 10, 10};
-            yield return new object[] {new BatchExtractor3(), 1000, 10, 100};
+            yield return new object[] { new BatchExtractor3(), 10, 10, 1 };
+            yield return new object[] { new BatchExtractor3(), 100, 10, 10 };
+            yield return new object[] { new BatchExtractor3(), 1000, 10, 100 };
 
-            yield return new object[] {new BatchExtractor4(), 10, 10, 1};
-            yield return new object[] {new BatchExtractor4(), 100, 10, 10};
-            yield return new object[] {new BatchExtractor4(), 1000, 10, 100};
+            yield return new object[] { new BatchExtractor4(), 10, 10, 1 };
+            yield return new object[] { new BatchExtractor4(), 100, 10, 10 };
+            yield return new object[] { new BatchExtractor4(), 1000, 10, 100 };
 
-            yield return new object[] {new BatchExtractor5(), 10, 10, 1};
-            yield return new object[] {new BatchExtractor5(), 100, 10, 10};
-            yield return new object[] {new BatchExtractor5(), 1000, 10, 100};
+            yield return new object[] { new BatchExtractor5(), 10, 10, 1 };
+            yield return new object[] { new BatchExtractor5(), 100, 10, 10 };
+            yield return new object[] { new BatchExtractor5(), 1000, 10, 100 };
 
-            yield return new object[] {new BatchExtractor6(), 10, 10, 1};
-            yield return new object[] {new BatchExtractor6(), 100, 10, 10};
-            yield return new object[] {new BatchExtractor6(), 1000, 10, 100};
+            yield return new object[] { new BatchExtractor6(), 10, 10, 1 };
+            yield return new object[] { new BatchExtractor6(), 100, 10, 10 };
+            yield return new object[] { new BatchExtractor6(), 1000, 10, 100 };
+
+            yield return new object[] { new BatchExtractor7(), 10, 10, 1 };
+            yield return new object[] { new BatchExtractor7(), 100, 10, 10 };
+            yield return new object[] { new BatchExtractor7(), 1000, 10, 100 };
         }
     }
 }
