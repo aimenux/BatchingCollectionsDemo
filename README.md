@@ -1,4 +1,5 @@
-﻿﻿![.NET Core](https://github.com/aimenux/BatchingCollectionsDemo/workflows/.NET%20Core/badge.svg)
+﻿[![.NET](https://github.com/aimenux/BatchingCollectionsDemo/actions/workflows/ci.yml/badge.svg)](https://github.com/aimenux/BatchingCollectionsDemo/actions/workflows/ci.yml)
+
 # BatchingCollectionsDemo
 ```
 Batches an enumerable into sized chunks
